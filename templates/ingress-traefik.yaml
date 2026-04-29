@@ -1,0 +1,32 @@
+---
+{{- if eq .Values.ingressController "traefik" }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-{{ .Release.Name }}
+  {{- if .Values.traefik.annotations }}
+  annotations:
+    {{- range $key, $value := .Values.traefik.annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  {{- end }}
+spec:
+  ingressClassName: "traefik"
+{{- if eq "https" .Values.httpScheme }}
+  tls:
+    - hosts:
+      - {{ .Values.cloudbeaverBaseDomain }}
+      secretName: {{ .Release.Name }}-ingress-tls
+{{- end }}
+  rules:
+  - host: "{{ .Values.cloudbeaverBaseDomain }}"
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: cloudbeaver
+              port:
+                number: 8978
+{{ end }}

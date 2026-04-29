@@ -12,10 +12,10 @@ cloudbeaver:
   # pullCredsName: regcred
 
 # Ingress Values
-# Supported ingress controllers: nginx, haproxy, alb
+# Supported ingress controllers: nginx, haproxy, alb, traefik
 ingressController: traefik
 # Domain name for ingress endpoint
-cloudbeaverBaseDomain: "cloudbeaver.local"
+cloudbeaverBaseDomain: "cloudbeaver.timekettle.net"
 # LoadBallancer secure mode. Possible values - http, https
 httpScheme: http
 # If httpScheme is https.
@@ -35,6 +35,13 @@ aws:
     # alb.ingress.kubernetes.io/load-balancer-name: "cloudbeaver-alb"
     # alb.ingress.kubernetes.io/subnets: "subnet-12345,subnet-67890"
     # alb.ingress.kubernetes.io/security-groups: "sg-12345"
+
+# Traefik-specific configuration (only used when ingressController is "traefik")
+traefik:
+  # Optional annotations for Traefik ingress, e.g. cert-manager.io/cluster-issuer
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
 
 # Cloud storage configuration for persistent volumes.
 # The default value is None, indicating it is not a cloud deployment.

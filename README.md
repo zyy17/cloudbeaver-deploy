@@ -7,15 +7,32 @@
 * 4Gb RAM
 * Linux or macOS as deploy host
 * `git` and `kubectl` installed
-* [Nginx load balancer](https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-helm/) and [Kubernetes Helm plugin](https://helm.sh/docs/topics/plugins/) added to your `k8s`
+* An ingress controller (NGINX, HAProxy, ALB, or Traefik) and [Kubernetes Helm plugin](https://helm.sh/docs/topics/plugins/) added to your `k8s`
 
 #### Supported Ingress Controllers:
 
 * **nginx** - NGINX Ingress Controller (default)
 * **haproxy** - HAProxy Ingress Controller  
 * **alb** - AWS Application Load Balancer (for AWS EKS)
+* **traefik** - Traefik Ingress Controller
 
 For AWS EKS specific deployment instructions, see [AWS EKS deployment guide](../AWS/aws-eks/README.md).
+
+### Traefik ingress notes
+
+If you use Traefik, set `ingressController: traefik` in `values.yaml`.
+
+You can provide Traefik-specific annotations through:
+
+- `traefik.annotations` (for example, `cert-manager.io/cluster-issuer`)
+
+When `httpScheme=https`, the chart configures TLS for host `cloudbeaverBaseDomain`.
+It uses secret `<release-name>-ingress-tls`.
+
+### Storage access mode update
+
+The original PVC template `playground/cloudbeaver-deploy/k8s/templates/volume/cloudbeaver.yaml`
+was changed from `ReadWriteMany` to `ReadWriteOnce`.
 
 
 ### User and permissions changes
