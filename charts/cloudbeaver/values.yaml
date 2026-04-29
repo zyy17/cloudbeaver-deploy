@@ -22,7 +22,7 @@ cloudbeaver:
 # Supported ingress controllers: nginx, haproxy, alb, traefik
 ingressController: traefik
 # Domain name for ingress endpoint
-cloudbeaverBaseDomain: "cloudbeaver.timekettle.net"
+cloudbeaverBaseDomain: "cloudbeaver.local"
 # LoadBallancer secure mode. Possible values - http, https
 httpScheme: http
 # If httpScheme is https.
