@@ -13,7 +13,7 @@ helm install cloudbeaver cloudbeaver/cloudbeaver --values values.yaml
 To publish a new chart version:
 
 1. Bump `version` in `Chart.yaml`
-2. Push a tag like `v0.2.0`
+2. Push a tag like `v0.3.0`
 3. GitHub Action `Release Helm Chart` will publish the chart package and `index.yaml`
 
 #### Minimum requirements:
