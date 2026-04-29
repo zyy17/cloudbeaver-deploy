@@ -1,5 +1,21 @@
 ## Cloudbeaver Helm chart for Kubernetes
 
+### Use as GitHub Helm chart
+
+After chart release is published, you can install directly from GitHub Pages:
+
+```bash
+helm repo add cloudbeaver https://zyy17.github.io/cloudbeaver-deploy
+helm repo update
+helm install cloudbeaver cloudbeaver/cloudbeaver --values values.yaml
+```
+
+To publish a new chart version:
+
+1. Bump `version` in `Chart.yaml`
+2. Push a tag like `v0.2.0`
+3. GitHub Action `Release Helm Chart` will publish the chart package and `index.yaml`
+
 #### Minimum requirements:
 
 * Kubernetes >= 1.23
@@ -52,21 +68,20 @@ Additionally, the default Docker volumes directory’s ownership has changed.
 Previously, the volumes were owned by the ‘root’ user, but now they are owned by the ‘dbeaver’ user (‘UID=8978’).  
 
 ### How to run services
-- Clone this repo from GitHub: `git clone https://github.com/dbeaver/cloudbeaver-deploy`
-- `cd cloudbeaver-deploy/k8s`
-- `cp ./values.yaml.example ./values.yaml`
+- Clone this repo from GitHub: `git clone https://github.com/zyy17/cloudbeaver-deploy`
+- `cd cloudbeaver-deploy`
 - Edit chart values in `values.yaml` (use any text editor)
 - You must set the `cloudbeaver_db_password` variable before deploying the cluster. The database password is empty by default and the deployment will fail without it.
 - Configure domain and SSL certificate (optional)
-  - Add an A record in your DNS hosting for a value of `cloudbeaverBaseDomain` variable with load balancer IP address.
-  - If you set the *HTTPS* endpoint scheme, then create a valid TLS certificate for the domain endpoint `cloudbeaverBaseDomain` and place it into `k8s/ingressSsl`:  
+  - Add an A record in your DNS hosting for value `cloudbeaverBaseDomain` with your load balancer IP address.
+  - If you set *HTTPS* endpoint scheme, create a valid TLS certificate for `cloudbeaverBaseDomain` and place it into `ingressSsl`:  
     Certificate: `ingressSsl/fullchain.pem`  
     Private Key: `ingressSsl/privkey.pem`
 - Deploy Cloudbeaver with Helm: `helm install cloudbeaver ./ --values ./values.yaml`
 
 ### Version update procedure.
 
-- Change directory to `cloudbeaver-deploy/k8s`.
+- Change directory to `cloudbeaver-deploy`.
 - Change value of `imageTag` in configuration file `values.yaml` with a preferred version. Go to next step if tag `latest` set.
 - Upgrade cluster: `helm upgrade cloudbeaver ./ --values ./values.yaml` 
 

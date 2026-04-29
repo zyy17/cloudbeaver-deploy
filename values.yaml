@@ -46,9 +46,7 @@ aws:
 # Traefik-specific configuration (only used when ingressController is "traefik")
 traefik:
   # Optional annotations for Traefik ingress, e.g. cert-manager.io/cluster-issuer
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: "true"
+  annotations: {}
 
 # Cloud storage configuration for persistent volumes.
 # The default value is None, indicating it is not a cloud deployment.
@@ -65,7 +63,7 @@ backend:
   cloudbeaver_db_driver: postgres-jdbc
   cloudbeaver_db_url: jdbc:postgresql://postgres:5432/cloudbeaver
   cloudbeaver_db_user: postgres
-  cloudbeaver_db_password: "l94Ex1O6iIRaWY238Hl"
+  cloudbeaver_db_password: ""
   # Resources for internal PostgreSQL container
   dbResources:
     requests:
