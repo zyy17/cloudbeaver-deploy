@@ -12,12 +12,10 @@ metadata:
   {{- end }}
 spec:
   ingressClassName: "traefik"
-{{- if eq "https" .Values.httpScheme }}
   tls:
     - hosts:
       - {{ .Values.cloudbeaverBaseDomain }}
       secretName: {{ .Release.Name }}-ingress-tls
-{{- end }}
   rules:
   - host: "{{ .Values.cloudbeaverBaseDomain }}"
     http:
