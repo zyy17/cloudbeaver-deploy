@@ -12,9 +12,10 @@ helm install cloudbeaver cloudbeaver/cloudbeaver --values values.yaml
 
 To publish a new chart version:
 
-1. Bump `version` in `Chart.yaml`
-2. Push a tag like `v0.3.0`
+1. Bump `version` in `charts/cloudbeaver/Chart.yaml`
+2. Push a tag like `v0.3.1`
 3. GitHub Action `Release Helm Chart` will publish the chart package and `index.yaml`
+4. Workflow releases chart from `charts/cloudbeaver` (`charts_dir: charts`)
 
 #### Minimum requirements:
 
@@ -70,28 +71,28 @@ Previously, the volumes were owned by the ‘root’ user, but now they are owne
 ### How to run services
 - Clone this repo from GitHub: `git clone https://github.com/zyy17/cloudbeaver-deploy`
 - `cd cloudbeaver-deploy`
-- Edit chart values in `values.yaml` (use any text editor)
+- Edit chart values in `charts/cloudbeaver/values.yaml` (use any text editor)
 - You must set the `cloudbeaver_db_password` variable before deploying the cluster. The database password is empty by default and the deployment will fail without it.
 - Configure domain and SSL certificate (optional)
   - Add an A record in your DNS hosting for value `cloudbeaverBaseDomain` with your load balancer IP address.
-  - If you set *HTTPS* endpoint scheme, create a valid TLS certificate for `cloudbeaverBaseDomain` and place it into `ingressSsl`:  
-    Certificate: `ingressSsl/fullchain.pem`  
-    Private Key: `ingressSsl/privkey.pem`
-- Deploy Cloudbeaver with Helm: `helm install cloudbeaver ./ --values ./values.yaml`
+  - If you set *HTTPS* endpoint scheme, create a valid TLS certificate for `cloudbeaverBaseDomain` and place it into `charts/cloudbeaver/ingressSsl`:  
+    Certificate: `charts/cloudbeaver/ingressSsl/fullchain.pem`  
+    Private Key: `charts/cloudbeaver/ingressSsl/privkey.pem`
+- Deploy Cloudbeaver with Helm: `helm install cloudbeaver ./charts/cloudbeaver --values ./charts/cloudbeaver/values.yaml`
 
 ### Version update procedure.
 
 - Change directory to `cloudbeaver-deploy`.
-- Change value of `imageTag` in configuration file `values.yaml` with a preferred version. Go to next step if tag `latest` set.
-- Upgrade cluster: `helm upgrade cloudbeaver ./ --values ./values.yaml` 
+- Change value of `imageTag` in configuration file `charts/cloudbeaver/values.yaml` with a preferred version. Go to next step if tag `latest` set.
+- Upgrade cluster: `helm upgrade cloudbeaver ./charts/cloudbeaver --values ./charts/cloudbeaver/values.yaml` 
 
 ### OpenShift deployment
 
 You need additional configuration changes
 
-- In `values.yaml` change the `ingressController` value to `haproxy`
+- In `charts/cloudbeaver/values.yaml` change the `ingressController` value to `haproxy`
 - Add security context  
-  Uncomment the following lines in `cloudbeaver.yaml` files in [templates/deployment](templates/deployment):
+  Uncomment the following lines in `cloudbeaver.yaml` files in [templates/deployment](charts/cloudbeaver/templates/deployment):
     ```yaml
           # securityContext:
           #     runAsUser: 1000
