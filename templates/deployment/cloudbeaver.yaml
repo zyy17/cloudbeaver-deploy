@@ -57,7 +57,8 @@ spec:
                   key: postgres-pass
           ports:
             - containerPort: 8978
-          resources: {}
+          resources:
+{{- toYaml .Values.cloudbeaver.resources | nindent 12 }}
           volumeMounts:
             - mountPath: /opt/cloudbeaver/workspace
               name: {{ .Release.Name }}-data

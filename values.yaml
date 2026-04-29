@@ -8,6 +8,13 @@ cloudbeaver:
   image: dbeaver/cloudbeaver
   imageTag: "26.0.3"
   pullPolicy: Always
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: "1"
+      memory: 2Gi
   # pullCredsName - name of a secret config map that contains docker repo auths
   # pullCredsName: regcred
 
@@ -59,3 +66,11 @@ backend:
   cloudbeaver_db_url: jdbc:postgresql://postgres:5432/cloudbeaver
   cloudbeaver_db_user: postgres
   cloudbeaver_db_password: "l94Ex1O6iIRaWY238Hl"
+  # Resources for internal PostgreSQL container
+  dbResources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 1Gi

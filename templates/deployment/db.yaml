@@ -36,7 +36,8 @@ spec:
                   key: postgres-pass
           ports:
             - containerPort: 5432
-          resources: {}
+          resources:
+{{- toYaml .Values.backend.dbResources | nindent 12 }}
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: {{ .Release.Name }}-db-data

@@ -34,6 +34,15 @@ It uses secret `<release-name>-ingress-tls`.
 The original PVC template `playground/cloudbeaver-deploy/k8s/templates/volume/cloudbeaver.yaml`
 was changed from `ReadWriteMany` to `ReadWriteOnce`.
 
+### Resource limits and requests
+
+You can configure container resource constraints in `values.yaml`:
+
+- `cloudbeaver.resources` for the CloudBeaver container
+- `backend.dbResources` for the internal PostgreSQL container
+
+Both support standard Kubernetes `requests` and `limits` for CPU and memory.
+
 
 ### User and permissions changes
 
