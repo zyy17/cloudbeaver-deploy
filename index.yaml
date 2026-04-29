@@ -3,6 +3,26 @@ entries:
   cloudbeaver:
   - apiVersion: v2
     appVersion: 26.0.3
+    created: "2026-04-29T04:58:42.585226507Z"
+    description: Helm chart for deploying CloudBeaver on Kubernetes
+    digest: 34fbed6522ab630147ccfe0fdb60792281d67bc8be0c39ee78f1040bfa2fc0ae
+    home: https://github.com/zyy17/cloudbeaver-deploy
+    keywords:
+    - cloudbeaver
+    - database
+    - kubernetes
+    kubeVersion: '>=1.23.0-0'
+    maintainers:
+    - name: zyy17
+    name: cloudbeaver
+    sources:
+    - https://github.com/zyy17/cloudbeaver-deploy
+    type: application
+    urls:
+    - https://github.com/zyy17/cloudbeaver-deploy/releases/download/cloudbeaver-0.3.2/cloudbeaver-0.3.2.tgz
+    version: 0.3.2
+  - apiVersion: v2
+    appVersion: 26.0.3
     created: "2026-04-29T02:15:24.602344807Z"
     description: Helm chart for deploying CloudBeaver on Kubernetes
     digest: 648334c7ac286efa03118f68044961d4c54a922e59b87c0db6f69604abf8fdc9
@@ -21,4 +41,4 @@ entries:
     urls:
     - https://github.com/zyy17/cloudbeaver-deploy/releases/download/cloudbeaver-0.3.1/cloudbeaver-0.3.1.tgz
     version: 0.3.1
-generated: "2026-04-29T02:15:24.602350005Z"
+generated: "2026-04-29T04:58:42.58523492Z"
