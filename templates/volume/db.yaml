@@ -1,0 +1,19 @@
+{{- if .Values.backend.internal_db }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    app: {{ .Release.Name }}-db-data
+  name: {{ .Release.Name }}-db-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  {{- if eq .Values.cloudProvider "aws" }}
+  storageClassName: ebs-sc
+  {{- end }}
+  resources:
+    requests:
+      storage: 2Gi
+status: {}
+{{- end }}

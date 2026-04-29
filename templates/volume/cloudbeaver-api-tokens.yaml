@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    app: {{ .Release.Name }}-api-tokens
+  name: {{ .Release.Name }}-api-tokens
+spec:
+  accessModes:
+    {{- if eq .Values.cloudProvider "aws" }}
+    - ReadWriteMany
+    {{- else }}
+    - ReadWriteOnce
+    {{- end }}
+  {{- if eq .Values.cloudProvider "aws" }}
+  storageClassName: {{ .Values.storage.storageClassName }}
+  {{- end }}
+  resources:
+    requests:
+      storage: 1Gi
+status: {}
+
